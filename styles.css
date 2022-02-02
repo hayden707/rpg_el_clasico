@@ -1,7 +1,71 @@
+/* Background image */
+
+body {
+  background-image: url('https://i.imgur.com/60Zh66s.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
 img {
   max-height: 100%;
 }
 
+/* Pitch, Grid, and Player Images */
+
+.pitch {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 100vh;
+  width: auto;
+  margin: auto;
+}
+
 .player_photo {
-  height: 12em;
+  height: 8em;
+}
+
+/* Player Positioning */
+
+#rm1 {
+  grid-column-start: 1;
+}
+
+#rm2 {
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+
+#rm3 {
+  grid-column-start: 1;
+  grid-row-start: 3;
+}
+
+#fcb1 {
+  grid-column-start: 3;
+  grid-row-start: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#fcb2 {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#fcb3 {
+  grid-column-start: 3;
+  grid-row-start: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Text */
+
+#text-box {
+  text-align: center;
+  color: white;
+  font-size: 2em;
 }
