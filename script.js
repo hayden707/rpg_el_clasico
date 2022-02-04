@@ -11,12 +11,12 @@ class Player {
 }
 // Players
 
-const Benzema = new Player('Benzema', 'Madrid', 'pass', 'shoot', 'Offense')
-const Casemiro = new Player('Casemiro', 'Madrid', 'pass', 'shoot', 'Offense')
-const Carvajal = new Player('Carvajal', 'Madrid', 'tackle', 'clear', 'Defense')
-const Memphis = new Player('Memphis', 'Barcelona', 'pass', 'shoot', 'Offense')
-const DeJong = new Player('DeJong', 'Barcelona', 'pass', 'shoot', 'Offense')
-const Pique = new Player('Pique', 'Barcelona', 'tackle', 'clear', 'Offense')
+const Benzema = new Player('Benzema', 'Madrid', 'PASS', 'SHOOT', 'Offense')
+const Casemiro = new Player('Casemiro', 'Madrid', 'PASS', 'SHOOT', 'Offense')
+const Carvajal = new Player('Carvajal', 'Madrid', 'TACKLE', 'CLEAR', 'Defense')
+const Memphis = new Player('Memphis', 'Barcelona', 'PASS', 'SHOOT', 'Offense')
+const DeJong = new Player('DeJong', 'Barcelona', 'PASS', 'SHOOT', 'Offense')
+const Pique = new Player('Pique', 'Barcelona', 'TACKLE', 'CLEAR', 'Offense')
 
 // Stamina Object
 
@@ -42,6 +42,15 @@ const button1 = document.querySelector('#button1')
 const button2 = document.querySelector('#button2')
 const text = document.querySelector('#text-box')
 
+// Player queryselectors and add to object
+
+Benzema.image = document.querySelector('#rm1')
+Casemiro.image = document.querySelector('#rm2')
+Carvajal.image = document.querySelector('#rm3')
+Memphis.image = document.querySelector('#fcb1')
+DeJong.image = document.querySelector('#fcb2')
+Pique.image = document.querySelector('#fcb2')
+
 // Hide Button2
 
 button2.style.display = 'none'
@@ -60,6 +69,9 @@ const moveOne = (e) => {
   e.target.value === 'button1'
     ? (move = currentPlayer.move1)
     : (move = currentPlayer.move2)
+  currentPlayer.team === 'Barcelona'
+    ? (currentPlayer.image.style.gridColumnStart = '3')
+    : (currentPlayer.image.style.gridColumnStart = '1')
   increaseIndex()
   button1.style.visibility = 'hidden'
   button2.style.visibility = 'hidden'
@@ -69,11 +81,22 @@ const moveOne = (e) => {
   stamina.fcb -= Math.floor(Math.random() * 50)
   setTimeout(() => {
     text.innerHTML = `${currentPlayer.name} makes a play on the ball.`
+    currentPlayer.team === 'Barcelona'
+      ? (currentPlayer.image.style.gridColumnStart = '2')
+      : (currentPlayer.image.style.gridColumnStart = '3')
     increaseIndex()
     document.querySelector('#fcb-stamina').innerHTML = `Stamina: ${stamina.fcb}`
     currentPlayer = order[index]
   }, 2500)
   setTimeout(() => {
+    index === 0 ? (fcb1.style.gridColumnStart = '3') : null
+    index > 0 && order[index - 1].team === 'Barcelona'
+      ? (order[index - 1].image.style.gridColumnStart = '3')
+      : (order[index - 1].image.style.gridColumnStart = '1')
+    console.log(order[index - 1])
+    currentPlayer.team === 'Barcelona'
+      ? (currentPlayer.image.style.gridColumnStart = '2')
+      : (currentPlayer.image.style.gridColumnStart = '3')
     text.innerHTML = `It's ${currentPlayer.name}'s turn with the ball.`
     button1.innerHTML = currentPlayer.move1
     button2.innerHTML = currentPlayer.move2
@@ -89,20 +112,17 @@ const playerMove = () => {
 
 const startGame = () => {
   if (currentPlayer.position === 'Offense') {
-    button1.innerHTML = 'Pass'
-    button2.innerHTML = 'Shoot'
+    button1.innerHTML = 'PASS'
+    button2.innerHTML = 'SHOOT'
   } else {
-    button1.innerHTML = 'Tackle'
-    button2.innerHTML = 'Clear'
+    button1.innerHTML = 'TACKLE'
+    button2.innerHTML = 'CLEAR'
   }
   button2.style.display = 'block'
 
   //next
-
+  currentPlayer.image.style.gridColumnStart = '2'
   if (currentPlayer) playerMove()
 }
 
-// const testBtn = (e) => {
-//   console.log(e.target.value)
-// }
 button1.addEventListener('click', startGame)
