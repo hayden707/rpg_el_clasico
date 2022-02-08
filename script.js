@@ -65,7 +65,7 @@ const increaseIndex = () => {
 
 const moveOne = (e) => {
   let move
-  stamina.rm -= Math.floor(Math.random() * 50)
+  stamina.rm -= Math.floor(Math.random() * 100)
   e.target.value === 'button1'
     ? (move = currentPlayer.move1)
     : (move = currentPlayer.move2)
@@ -73,6 +73,7 @@ const moveOne = (e) => {
     ? (currentPlayer.image.style.gridColumnStart = '3')
     : (currentPlayer.image.style.gridColumnStart = '1')
   increaseIndex()
+  console.log(index, 'Index 1', currentPlayer, 'currentP 1')
   button1.style.visibility = 'hidden'
   button2.style.visibility = 'hidden'
   document.querySelector('#rm-stamina').innerHTML = `Stamina: ${stamina.rm}`
@@ -87,14 +88,18 @@ const moveOne = (e) => {
     increaseIndex()
     document.querySelector('#fcb-stamina').innerHTML = `Stamina: ${stamina.fcb}`
     currentPlayer = order[index]
+    console.log(index, 'index 2', currentPlayer, 'currentP 2')
   }, 2500)
   setTimeout(() => {
-    index === 0 ? (fcb1.style.gridColumnStart = '3') : null
+    if (index === 0) {
+      fcb1.style.gridColumnStart = '3'
+      rm1.style.gridColumnStart = '1'
+    }
     index > 0 && order[index - 1].team === 'Barcelona'
       ? (order[index - 1].image.style.gridColumnStart = '3')
       : (order[index - 1].image.style.gridColumnStart = '1')
     console.log(order[index - 1])
-    currentPlayer.team === 'Barcelona'
+    index > 0 && currentPlayer.team === 'Barcelona'
       ? (currentPlayer.image.style.gridColumnStart = '2')
       : (currentPlayer.image.style.gridColumnStart = '3')
     text.innerHTML = `It's ${currentPlayer.name}'s turn with the ball.`
