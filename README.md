@@ -22,6 +22,12 @@ These objects were essential to my game order as well. I wanted the order of the
 
 I was also able to make the site responsive to mobile screens and tablets.
 
+---
+## Game Logic
+---
+Most of the game logic occurs within one function. The effects of all player moves are randomized. Players move across the board by altering their gridColumnStart on my game grid. The game index is increased and the next player is declared as the currentPlayer. A function checks to see if either team has won, and the process is repeated.
 
+Here is a snippet of the first part of my game logic:
+![image](https://i.imgur.com/iaKqcH9.png)
 
 
