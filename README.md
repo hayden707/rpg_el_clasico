@@ -30,4 +30,9 @@ Most of the game logic occurs within one function. The effects of all player mov
 Here is a snippet of the first part of my game logic:
 ![image](https://i.imgur.com/iaKqcH9.png)
 
+---
+## Future Updates
+---
+
+While I like the early RPG aesthetic, I would like to explore how to implement animations to make the game more visually interesting. I would also like to make it possible for players to choose their team, and for the battle system to get more complex.
 
