@@ -4,6 +4,7 @@ body {
   background-image: url('https://i.imgur.com/60Zh66s.jpg');
   background-repeat: no-repeat;
   background-size: 100% auto;
+  background-color: black;
 }
 
 img {
@@ -90,6 +91,13 @@ img {
   align-items: center;
 }
 
+button {
+  background-color: #2f4f4f;
+  color: white;
+  border-radius: 12px;
+  margin: 2px;
+}
+
 /* #button1 {
   display: flex;
   justify-content: center;
@@ -118,5 +126,26 @@ img {
 @media screen and (max-width: 873px) {
   body {
     background-image: url('https://i.imgur.com/z1symAI.jpg');
+  }
+}
+
+@media screen and (max-width: 478px) {
+  .player_photo {
+    height: 5em;
+  }
+
+  .pitch {
+    height: 400px;
+  }
+
+  #text-box {
+    font-size: 1.15em;
+    color: black;
+  }
+
+  #rm-stamina,
+  #fcb-stamina {
+    color: black;
+    font-size: 75em;
   }
 }
