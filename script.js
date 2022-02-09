@@ -1,5 +1,4 @@
 // Player object constructor
-
 class Player {
   constructor(name, team, move1, move2, position) {
     ;(this.name = name),
@@ -10,7 +9,6 @@ class Player {
   }
 }
 // Players
-
 const Benzema = new Player('Benzema', 'Madrid', 'PASS', 'SHOOT', 'Offense')
 const Casemiro = new Player('Casemiro', 'Madrid', 'PASS', 'SHOOT', 'Offense')
 const Carvajal = new Player('Carvajal', 'Madrid', 'TACKLE', 'CLEAR', 'Defense')
@@ -19,7 +17,6 @@ const DeJong = new Player('DeJong', 'Barcelona', 'PASS', 'SHOOT', 'Offense')
 const Pique = new Player('Pique', 'Barcelona', 'TACKLE', 'CLEAR', 'Offense')
 
 // Game Data Object
-
 let GameData = {
   fcb: 500,
   rm: 500,
@@ -30,7 +27,6 @@ let GameData = {
 gameState = true
 
 // Game order array
-
 const order = [Memphis, Carvajal, DeJong, Casemiro, Pique, Benzema]
 let currentPlayer = Memphis
 let index = 0
@@ -38,13 +34,11 @@ const offenseMoves = ['Pass', 'Shoot']
 const defenseMoves = ['Tackle', 'Clear']
 
 // Global queryselectors
-
 const button1 = document.querySelector('#button1')
 const button2 = document.querySelector('#button2')
 const text = document.querySelector('#text-box')
 
 // Player queryselectors and add to object
-
 Benzema.image = document.querySelector('#rm1')
 Casemiro.image = document.querySelector('#rm2')
 Carvajal.image = document.querySelector('#rm3')
@@ -53,17 +47,14 @@ DeJong.image = document.querySelector('#fcb2')
 Pique.image = document.querySelector('#fcb3')
 
 // Hide Button2
-
 button2.style.display = 'none'
 
 // Increase index
-
 const increaseIndex = () => {
   index < 5 ? index++ : (index = 0)
 }
 
 // Restart Game
-
 const restart = () => {
   window.location.reload(false)
 }
@@ -155,6 +146,7 @@ const moveOne = (e) => {
   }
 }
 
+// Add move event listeners to buttons
 const playerMove = () => {
   button1.addEventListener('click', moveOne)
   button2.addEventListener('click', moveOne)
@@ -172,11 +164,9 @@ const startGame = () => {
   button2.style.display = 'block'
   text.innerHTML = 'Memphis takes the ball.'
 
-  //next
   currentPlayer.image.style.gridColumnStart = '2'
   if (currentPlayer) playerMove()
-
-  console.log(GameData.winner)
 }
 
+// Event listener to start game
 button1.addEventListener('click', startGame)
