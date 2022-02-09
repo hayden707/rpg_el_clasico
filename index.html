@@ -5,20 +5,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 <body>
   <div class="gameboard">
     <header></header>
-      <p class="dialogue_box" id="dialogue">You have encountered the FINAL BOSS!</p>
-      <div class="battleground">
-        <div id="boss"><img src="https://i.imgur.com/I2zr1HH.png"></div>
-        <div id="char1"><img src=https://i.imgur.com/WfA8QBg.png?1></div>
-        <div id="char2"><img src="https://i.imgur.com/0PW3vyL.png"></div>
-        <div id="char3"><img src="https://i.imgur.com/6LFHZC4.png?1"></div>
-      </div>
-      <p class="pagelink"><a href="game.html">START GAME</a></p>
+    <div class="text-bar">
+    <p id="rm-stamina">Stamina: 500</p>
+    <p id="text-box">Welcome to El Clasico!</p>
+    <p id="fcb-stamina">Stamina: 500</p>
   </div>
-<script src="script.js"></script>
+      <div class="pitch">
+        <div class="player_photo" id="rm1"><img src="https://i.imgur.com/p0zc7z8.png"></div>
+        <div class="player_photo" id="rm2"><img src="https://i.imgur.com/Xw1Grsb.png"></div>
+        <div class="player_photo" id="rm3"><img src="https://i.imgur.com/2o2TlxW.png"></div>
+        <div class="player_photo" id="fcb1"><img src=https://i.imgur.com/icgSNJp.png></div>
+        <div class="player_photo" id="fcb2"><img src="https://i.imgur.com/IJlhQEA.png"></div>
+        <div class="player_photo" id="fcb3"><img src="https://i.imgur.com/QzfteJX.png"></div>
+        <div id="buttons">
+          <button id="button1" value="button1" >Start Game</button>
+          <button id="button2" value="button2" ></button>
+        </div>
+      </div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
 </html>

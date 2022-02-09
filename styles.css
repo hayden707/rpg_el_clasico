@@ -5,6 +5,7 @@ body {
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-color: black;
+  font-family: 'Mukta', sans-serif;
 }
 
 img {
@@ -96,6 +97,7 @@ button {
   color: white;
   border-radius: 12px;
   margin: 2px;
+  font-family: 'Mukta', sans-serif;
 }
 
 /* #button1 {
@@ -146,6 +148,6 @@ button {
   #rm-stamina,
   #fcb-stamina {
     color: black;
-    font-size: 75em;
+    font-size: 0.75em;
   }
 }

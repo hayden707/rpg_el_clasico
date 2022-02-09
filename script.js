@@ -50,7 +50,7 @@ Casemiro.image = document.querySelector('#rm2')
 Carvajal.image = document.querySelector('#rm3')
 Memphis.image = document.querySelector('#fcb1')
 DeJong.image = document.querySelector('#fcb2')
-Pique.image = document.querySelector('#fcb2')
+Pique.image = document.querySelector('#fcb3')
 
 // Hide Button2
 
@@ -170,6 +170,7 @@ const startGame = () => {
     button2.innerHTML = 'CLEAR'
   }
   button2.style.display = 'block'
+  text.innerHTML = 'Memphis takes the ball.'
 
   //next
   currentPlayer.image.style.gridColumnStart = '2'
