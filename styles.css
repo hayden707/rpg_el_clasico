@@ -95,3 +95,28 @@ img {
   justify-content: center;
   align-items: center;
 } */
+
+@media screen and (max-width: 1209px) {
+  body {
+    background-image: url('https://i.imgur.com/GnvoyVU.jpg');
+  }
+
+  #rm-stamina,
+  #fcb-stamina {
+    font-size: 1em;
+  }
+
+  .player_photo {
+    height: 6em;
+  }
+
+  #text-box {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 873px) {
+  body {
+    background-image: url('https://i.imgur.com/z1symAI.jpg');
+  }
+}

@@ -18,11 +18,12 @@ const Memphis = new Player('Memphis', 'Barcelona', 'PASS', 'SHOOT', 'Offense')
 const DeJong = new Player('DeJong', 'Barcelona', 'PASS', 'SHOOT', 'Offense')
 const Pique = new Player('Pique', 'Barcelona', 'TACKLE', 'CLEAR', 'Offense')
 
-// Stamina Object
+// Game Data Object
 
-let stamina = {
+let GameData = {
   fcb: 500,
-  rm: 500
+  rm: 500,
+  winner: false
 }
 
 // Game State
@@ -61,53 +62,97 @@ const increaseIndex = () => {
   index < 5 ? index++ : (index = 0)
 }
 
+// Restart Game
+
+const restart = () => {
+  window.location.reload(false)
+}
+
+// Check Winner
+
+const checkWin = () => {
+  if (GameData.fcb <= 0 || GameData.rm <= 0) {
+    GameData.winner = true
+    if (GameData.rm <= 0) {
+      Benzema.image.style.visibility = 'hidden'
+      Casemiro.image.style.visibility = 'hidden'
+      Carvajal.image.style.visibility = 'hidden'
+      document.querySelector('#rm-stamina').innerHTML = `Stamina: 0`
+      text.innerHTML = 'Barcelona Scores!'
+    } else if (GameData.fcb <= 0) {
+      Memphis.image.style.visibility = 'hidden'
+      DeJong.image.style.visibility = 'hidden'
+      Pique.image.style.visibility = 'hidden'
+      document.querySelector('#fcb-stamina').innerHTML = `Stamina: 0`
+      text.innerHTML = 'Real Madrid Scores!'
+    }
+    button1.innerHTML = 'Play Again'
+    button1.addEventListener('click', restart)
+    button2.style.visibility = 'hidden'
+  }
+}
+
 // Main game functionality
 
 const moveOne = (e) => {
-  let move
-  stamina.rm -= Math.floor(Math.random() * 100)
-  e.target.value === 'button1'
-    ? (move = currentPlayer.move1)
-    : (move = currentPlayer.move2)
-  currentPlayer.team === 'Barcelona'
-    ? (currentPlayer.image.style.gridColumnStart = '3')
-    : (currentPlayer.image.style.gridColumnStart = '1')
-  increaseIndex()
-  console.log(index, 'Index 1', currentPlayer, 'currentP 1')
-  button1.style.visibility = 'hidden'
-  button2.style.visibility = 'hidden'
-  document.querySelector('#rm-stamina').innerHTML = `Stamina: ${stamina.rm}`
-  text.innerHTML = `${currentPlayer.name}'s move decreased Madrid's stamina by choosing to ${move}.`
-  currentPlayer = order[index]
-  stamina.fcb -= Math.floor(Math.random() * 50)
-  setTimeout(() => {
-    text.innerHTML = `${currentPlayer.name} makes a play on the ball.`
-    currentPlayer.team === 'Barcelona'
-      ? (currentPlayer.image.style.gridColumnStart = '2')
-      : (currentPlayer.image.style.gridColumnStart = '3')
-    increaseIndex()
-    document.querySelector('#fcb-stamina').innerHTML = `Stamina: ${stamina.fcb}`
-    currentPlayer = order[index]
-    console.log(index, 'index 2', currentPlayer, 'currentP 2')
-  }, 2500)
-  setTimeout(() => {
-    if (index === 0) {
-      fcb1.style.gridColumnStart = '3'
-      rm1.style.gridColumnStart = '1'
+  if (GameData.winner === false) {
+    let move
+    GameData.rm -= Math.floor(Math.random() * 100)
+    checkWin()
+    if (GameData.winner === false) {
+      e.target.value === 'button1'
+        ? (move = currentPlayer.move1)
+        : (move = currentPlayer.move2)
+      currentPlayer.team === 'Barcelona'
+        ? (currentPlayer.image.style.gridColumnStart = '3')
+        : (currentPlayer.image.style.gridColumnStart = '1')
+      increaseIndex()
+      button1.style.visibility = 'hidden'
+      button2.style.visibility = 'hidden'
+      document.querySelector(
+        '#rm-stamina'
+      ).innerHTML = `Stamina: ${GameData.rm}`
+      text.innerHTML = `${currentPlayer.name}'s move decreased Madrid's stamina by choosing to ${move}.`
+      currentPlayer = order[index]
+      GameData.fcb -= Math.floor(Math.random() * 50)
+      checkWin()
     }
-    index > 0 && order[index - 1].team === 'Barcelona'
-      ? (order[index - 1].image.style.gridColumnStart = '3')
-      : (order[index - 1].image.style.gridColumnStart = '1')
-    console.log(order[index - 1])
-    index > 0 && currentPlayer.team === 'Barcelona'
-      ? (currentPlayer.image.style.gridColumnStart = '2')
-      : (currentPlayer.image.style.gridColumnStart = '3')
-    text.innerHTML = `It's ${currentPlayer.name}'s turn with the ball.`
-    button1.innerHTML = currentPlayer.move1
-    button2.innerHTML = currentPlayer.move2
-    button1.style.visibility = 'visible'
-    button2.style.visibility = 'visible'
-  }, 5000)
+    if (GameData.winner == false) {
+      setTimeout(() => {
+        text.innerHTML = `${currentPlayer.name} makes a play on the ball.`
+        currentPlayer.team === 'Barcelona'
+          ? (currentPlayer.image.style.gridColumnStart = '2')
+          : (currentPlayer.image.style.gridColumnStart = '3')
+        increaseIndex()
+        document.querySelector(
+          '#fcb-stamina'
+        ).innerHTML = `Stamina: ${GameData.fcb}`
+        currentPlayer = order[index]
+      }, 2500)
+      setTimeout(() => {
+        // if  0
+        if (index === 0) {
+          fcb1.style.gridColumnStart = '3'
+          rm1.style.gridColumnStart = '1'
+        }
+        index > 0 && order[index - 1].team === 'Barcelona'
+          ? (order[index - 1].image.style.gridColumnStart = '3')
+          : index > 0 && order[index - 1].team === 'Madrid'
+          ? (order[index - 1].image.style.gridColumnStart = '1')
+          : null
+        index > 0 && currentPlayer.team === 'Barcelona'
+          ? (currentPlayer.image.style.gridColumnStart = '2')
+          : (currentPlayer.image.style.gridColumnStart = '3')
+        text.innerHTML = `It's ${currentPlayer.name}'s turn with the ball.`
+        button1.innerHTML = currentPlayer.move1
+        button2.innerHTML = currentPlayer.move2
+        button1.style.visibility = 'visible'
+        button2.style.visibility = 'visible'
+      }, 5000)
+    }
+  } else {
+    return
+  }
 }
 
 const playerMove = () => {
@@ -115,6 +160,7 @@ const playerMove = () => {
   button2.addEventListener('click', moveOne)
 }
 
+// Starter function
 const startGame = () => {
   if (currentPlayer.position === 'Offense') {
     button1.innerHTML = 'PASS'
@@ -128,6 +174,8 @@ const startGame = () => {
   //next
   currentPlayer.image.style.gridColumnStart = '2'
   if (currentPlayer) playerMove()
+
+  console.log(GameData.winner)
 }
 
 button1.addEventListener('click', startGame)
